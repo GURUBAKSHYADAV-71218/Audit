@@ -207,3 +207,8 @@ AUDIT_BROWSER_CLOSED
 ```
 
 ...plus `*_FAILED` variants at each stage on error. None of these log cookies, headers, page content, or secrets - only stage names, status codes, and sanitized error messages, which are also what gets categorized into the `AuditError.code` returned to the client (`invalid_url`, `blocked_target`, `unreachable`, `timeout`, `browser_unavailable`, `scan_failed`, `rate_limited`) rather than a raw stack trace.
+
+## What's intentionally not included
+
+Per the project's design philosophy: no auth, no payments, no teams, no database, no queue/worker infrastructure, no Docker. Scan results live in memory for 30 minutes so a shareable `/report/[id]` link works shortly after a scan on a warm instance (see caveat above), then they're gone - nothing is persisted.
+
